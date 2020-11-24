@@ -21,6 +21,9 @@
 		<!--<action name="account_*" class="accountAction" method="{1}">-->
 		<!--	<result name="success">/res.jsp</result>-->
 		<!--</action>-->
+		<action name="loginAction_*" class="" method="{1}">
+			<result name="success">/admin_index.jsp</result>
+		</action>
 	</package>
 
 </struts>
