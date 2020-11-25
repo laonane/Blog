@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -52,8 +53,8 @@
         博客系统
     </div>
     <div class="h_top_right">
-        <span style="margin-right: 50px">码蚁小强</span>
-        <span><a href="#" style="color: lightseagreen">退出</a></span>
+        <span style="margin-right: 50px"><s:property value="#session.curUser.username"/></span>
+        <span><a href="${pageContext.request.contextPath}/loginAction_loginOut.action" target="_parent" style="color: lightseagreen">退出</a></span>
     </div>
 
 </div>
