@@ -1,5 +1,6 @@
 package wiki.laona.service.impl;
 
+import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.dao.IUserDao;
 import wiki.laona.domain.User;
 import wiki.laona.service.ILoginService;
@@ -10,6 +11,7 @@ import wiki.laona.service.ILoginService;
  * @author: HuaiAnGG
  * @create: 2020-11-25 11:06
  **/
+@Transactional
 public class LoginServiceImpl implements ILoginService {
 
     /**

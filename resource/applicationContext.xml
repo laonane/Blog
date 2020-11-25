@@ -20,14 +20,23 @@
 	<bean id="loginAction" class="wiki.laona.web.LoginAction" scope="prototype">
 		<property name="loginService" ref="loginService"/>
 	</bean>
+	<bean id="categoryAction" class="wiki.laona.web.CategoryAction" scope="prototype">
+		<property name="categoryService" ref="categoryService"/>
+	</bean>
 	
 	<!--service-->
 	<bean id="loginService" class="wiki.laona.service.impl.LoginServiceImpl">
 		<property name="userDao" ref="userDao"/>
 	</bean>
+	<bean id="categoryService" class="wiki.laona.service.impl.CategoryServiceImpl">
+		<property name="categoryDao" ref="categoryDao"/>
+	</bean>
 	
 	<!--dao-->
 	<bean id="userDao" class="wiki.laona.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="categoryDao" class="wiki.laona.dao.impl.CategoryDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

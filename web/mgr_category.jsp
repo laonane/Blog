@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/amazeui.min.css" />
-    <link rel="stylesheet" href="js/pageStyle.css">
-    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pageStyle.css">
+    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 </head>
 <body>
 
@@ -23,7 +23,8 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <button id="add" class="am-btn am-btn-default">
-                        <span class="am-icon-plus"></span> 添加分类</button>
+                        <span class="am-icon-plus"></span> 添加分类
+                    </button>
                 </div>
             </div>
         </div>
@@ -52,8 +53,8 @@
 
 </div>
 
-<div id="modal_content">
-    <div id="close"><img src="images/delete_icon.png" alt=""></div>
+<div id="modal_content" style="height: 250px;">
+    <div id="close"><img src="${pageContext.request.contextPath}/images/delete_icon.png" alt=""></div>
     <div class="edit_content">
 
         <div class="item1">
@@ -63,19 +64,30 @@
         </div>
         <div class="item1">
             <div>
+                <span>parentid：</span>
+                <input type="text" class="am-form-field" id="parentId">&nbsp;&nbsp;
+                <br/>
                 <span>分类名称：</span>
-                <input type="text" class="am-form-field" >&nbsp;&nbsp;
+                <input type="text" class="am-form-field" id="cname">&nbsp;&nbsp;
+                <br/>
+                <button class="am-btn am-btn-default" type="button" id="addcategory">添加</button>
             </div>
         </div>
-        <div class="item1">
-            <button class="am-btn am-btn-default" type="button" >添加</button>
-        </div>
-        
     </div>
 </div>
 
 <script>
     $(function () {
+        /**
+         * 添加点击事件
+         */
+        $('#addcategory').click(function () {
+            var parentId = $('#parentId').val();
+            var cname = $('#cname').val();
+            $(window).attr('location',
+                '${pageContext.request.contextPath}/category_add.action?cname=' + cname + '&parentId=' + parentId);
+        });
+
         $('#add').click(function () {
             $("#modal_view").fadeIn();
             $("#modal_content").fadeIn();

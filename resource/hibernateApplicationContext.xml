@@ -42,6 +42,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>wiki/laona/domain/User.hbm.xml</value>
+				<value>wiki/laona/domain/Category.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

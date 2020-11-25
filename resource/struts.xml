@@ -18,7 +18,7 @@
 							<result name="input">/index.jsp</result>
 						</global-results>
 						-->
-		
+		<!--登录 action-->
 		<action name="loginAction_*" class="loginAction" method="{1}">
 			<!--登录成功-->
 			<result name="success" type="redirect">/mgr_index.jsp</result>
@@ -27,6 +27,12 @@
 			<!--退出登录-->
 			<result name="login_out" type="redirect">/mgr_login.jsp</result>
 			<allowed-methods>login, loginOut</allowed-methods>
+		</action>
+		
+		<!--分类 action-->
+		<action name="category_*" class="categoryAction" method="{1}">
+			<result name="success"  type="redirect">/mgr_category.jsp</result>
+			<allowed-methods>add</allowed-methods>
 		</action>
 	</package>
 
