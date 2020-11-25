@@ -17,17 +17,17 @@
 	<import resource="hibernateApplicationContext.xml"/>
 	
 	<!--配置 action-->
-	<!--<bean id="accountAction" class="wiki.laona.web.AccountAction" scope="prototype">-->
-	<!--	<property name="accountService" ref="accountService"/>-->
-	<!--</bean>-->
+	<bean id="loginAction" class="wiki.laona.web.LoginAction" scope="prototype">
+		<property name="loginService" ref="loginService"/>
+	</bean>
 	
 	<!--service-->
-	<!--<bean id="accountService" class="wiki.laona.service.impl.AccountServiceImpl">-->
-	<!--	<property name="accountDao" ref="accountDao"/>-->
-	<!--</bean>-->
+	<bean id="loginService" class="wiki.laona.service.impl.LoginServiceImpl">
+		<property name="userDao" ref="userDao"/>
+	</bean>
 	
 	<!--dao-->
-	<!--<bean id="accountDao" class="wiki.laona.dao.impl.AccountDaoImpl">-->
-	<!--	<property name="sessionFactory" ref="sessionFactory"/>-->
-	<!--</bean>-->
+	<bean id="userDao" class="wiki.laona.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 </beans>

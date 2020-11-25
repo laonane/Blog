@@ -41,7 +41,7 @@
 		<!--	设置映射文件-->
 		<property name="mappingResources">
 			<list>
-				<!--<value>wiki/laona/domain/Account.hbm.xml</value>-->
+				<value>wiki/laona/domain/User.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -6,7 +6,7 @@
 	<!--        设置开发模式-->
 	<constant name="struts.devMode" value="true"/>
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
-	<package name="method" extends="struts-default">
+	<package name="Blog" extends="struts-default">
 		<!--                &lt;!&ndash;全局结果页，如果在action中没有结果页，那就到全局里面找全局结果页&ndash;&gt;
 						<global-results>
 							<result name="login">/login.jsp</result>
@@ -18,11 +18,15 @@
 							<result name="input">/index.jsp</result>
 						</global-results>
 						-->
-		<!--<action name="account_*" class="accountAction" method="{1}">-->
-		<!--	<result name="success">/res.jsp</result>-->
-		<!--</action>-->
-		<action name="loginAction_*" class="" method="{1}">
-			<result name="success">/admin_index.jsp</result>
+		
+		<action name="loginAction_*" class="loginAction" method="{1}">
+			<!--登录成功-->
+			<result name="success" type="redirect">/mgr_index.jsp</result>
+			<!--登录失败-->
+			<result name="login">/mgr_login.jsp</result>
+			<!--退出登录-->
+			<result name="login_out" type="redirect">/mgr_login.jsp</result>
+			<allowed-methods>login, loginOut</allowed-methods>
 		</action>
 	</package>
 
