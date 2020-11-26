@@ -35,7 +35,7 @@
 			type:redirectAction     重定向到 action
 		-->
 		<action name="category_*" class="categoryAction" method="{1}">
-			<result name="success"  type="redirect">/mgr_category.jsp</result>
+			<!--<result name="success"  type="redirect">/mgr_category.jsp</result>-->
 			<!--<result name="category_list"  type="redirect">/mgr_category.jsp</result>-->
 			<result name="category_list">/mgr_category.jsp</result>
 			<!--重定向到  category_list.action 中-->

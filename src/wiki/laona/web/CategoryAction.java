@@ -38,7 +38,7 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
      */
     public String add() {
         categoryService.save(category);
-        return SUCCESS;
+        return "list_action";
     }
 
     public String list() {
