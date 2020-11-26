@@ -308,7 +308,7 @@ input[type="submit"]:hover, input[type="submit"]:focus {
 }
 
  .goods_list ul li:nth-child(2){
-	 flex: 6;
+	 flex: 4;
 }
 
 
@@ -337,10 +337,10 @@ input[type="submit"]:hover, input[type="submit"]:focus {
 }
 
 #account_List .list_goods_ul li:nth-child(1){
-	flex: 5;
+	flex: 2;
 }
 #account_List .title_ul li:nth-child(1){
-	flex: 5;
+	flex: 2;
 }
 
 .list_goods_ul .img_icon{

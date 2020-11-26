@@ -29,10 +29,18 @@
 			<allowed-methods>login, loginOut</allowed-methods>
 		</action>
 		
-		<!--分类 action-->
+		<!--
+			分类 action
+			type:redirect           重定向 url
+			type:redirectAction     重定向到 action
+		-->
 		<action name="category_*" class="categoryAction" method="{1}">
 			<result name="success"  type="redirect">/mgr_category.jsp</result>
-			<allowed-methods>add</allowed-methods>
+			<!--<result name="category_list"  type="redirect">/mgr_category.jsp</result>-->
+			<result name="category_list">/mgr_category.jsp</result>
+			<!--重定向到  category_list.action 中-->
+			<result name="list_action" type="redirectAction">category_list.action</result>
+			<allowed-methods>add, list, updateUI, update</allowed-methods>
 		</action>
 	</package>
 
