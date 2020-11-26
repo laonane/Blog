@@ -173,15 +173,13 @@
         });
 
         $('.delete_btn').click(function () {
+            // 获取 cid
             var cid = $(this).data('id');
-            // alert(cid);
-            console.log(cid);
             $(window).attr('location',
                 '${pageContext.request.contextPath}/category_delete.action?cid=' + cid);
         });
 
         $('#updatebtn').click(function () {
-            // alert("asdasda");
             var cname = $('#cname2').val();
             var parentId = $('#parentid2').val();
             var cid = $('#cid2').val();
