@@ -1,5 +1,6 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%
     String ctx = request.getContextPath();
     pageContext.setAttribute("ctx", ctx);
@@ -10,8 +11,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="${ctx }/css/style.css"
-          type="text/css" />
-    <link rel="stylesheet" href="${ctx }/css/amazeui.min.css" />
+          type="text/css"/>
+    <link rel="stylesheet" href="${ctx }/css/amazeui.min.css"/>
     <link rel="stylesheet" href="${ctx }/css/pageStyle.css">
 
 </head>
@@ -28,7 +29,8 @@
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
                     <button id="add" class="am-btn am-btn-default">
-                        <span class="am-icon-plus"></span> 新增</button>
+                        <span class="am-icon-plus"></span> 新增
+                    </button>
                 </div>
             </div>
         </div>
@@ -51,20 +53,18 @@
         <li>序号</li>
         <li>标题</li>
         <li>学科</li>
-        <li>技能</li>
         <li>编辑</li>
         <li>删除</li>
     </ul>
 
-    <s:iterator value="list">
+    <s:iterator value="#pageBean.list" var="article">
         <ul class="list_goods_ul">
-            <li>aaa</li>
-            <li>bbb</li>
-            <li>ccc</li>
-            <li>ddd</li>
+            <li><s:property value="#article.articleId"/></li>
+            <li><s:property value="#article.articleTitle"/></li>
+            <li><s:property value="#article.category.cname"/></li>
             <li>
                 <a href="#">
-                <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
+                    <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
             </li>
             <li>
                 <a href="#">
@@ -73,6 +73,9 @@
             </li>
         </ul>
     </s:iterator>
+
+    <s:debug/>
+
     <!--分页-->
     <div id="page" class="page_div"></div>
 </div>
@@ -80,21 +83,21 @@
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/paging.js"></script>
 <script>
-    
+
     //分页
     $("#page").paging({
-        pageNo:1,
-        totalPage: 5,
-        totalSize: 3,
-        callback: function(num) {
-          /*  $(window).attr('location','/article_list.action?currPage='+num);*/
-            alert(num);
+        pageNo: <s:property value="#pageBean.currentPage"/>,
+        totalPage: <s:property value="#pageBean.totalPage"/>,
+        totalSize: <s:property value="#pageBean.totalCount"/>,
+        callback: function (num) {
+            $(window).attr('location', '/article_pageList.action?currPage=' + num);
+            // alert(num);
         }
     });
 
     $("#add").click(function () {
-        alert("aaa");
-        $(window).attr('location','${ctx }/mgr_add_article.jsp');
+        // alert("aaa");
+        $(window).attr('location', '${ctx }/mgr_add_article.jsp');
     });
 </script>
 
