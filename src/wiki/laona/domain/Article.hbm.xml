@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+		"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="wiki.laona.domain.Article" table="article">
+		<!--
+			建立类属性哪一个是主键  还要跟数据库当中主键进行对象
+		-->
+		<id name="articleId" column="article_id">
+			<generator class="native"/>
+		</id>
+		<!--
+			建立类中的普通属性与数据库当中字段进行关联
+		-->
+		<property name="articleContext" column="article_context"/>
+		<property name="articleDesc" column="article_desc"/>
+		<property name="articlePic" column="article_pic"/>
+		<property name="articleTime" column="article_time"/>
+		<property name="articleTitle" column="article_title"/>
+		<many-to-one name="category" class="wiki.laona.domain.Category" column="article_cid"/>
+	</class>
+</hibernate-mapping>
+

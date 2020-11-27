@@ -42,6 +42,12 @@
 			<result name="list_action" type="redirectAction">category_list.action</result>
 			<allowed-methods>add, list, updateUI, update</allowed-methods>
 		</action>
+		
+		<!--文章列表-->
+		<action name="article_*" class="wiki.laona.web.ArticleAction" method="{1}">
+			<allowed-methods>list</allowed-methods>
+		</action>
+		
 	</package>
 
 </struts>

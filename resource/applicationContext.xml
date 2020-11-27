@@ -23,6 +23,9 @@
 	<bean id="categoryAction" class="wiki.laona.web.CategoryAction" scope="prototype">
 		<property name="categoryService" ref="categoryService"/>
 	</bean>
+	<bean id="articleAction" class="wiki.laona.web.ArticleAction" scope="prototype">
+		<property name="articleService" ref="articleService"/>
+	</bean>
 	
 	<!--service-->
 	<bean id="loginService" class="wiki.laona.service.impl.LoginServiceImpl">
@@ -31,12 +34,18 @@
 	<bean id="categoryService" class="wiki.laona.service.impl.CategoryServiceImpl">
 		<property name="categoryDao" ref="categoryDao"/>
 	</bean>
+	<bean id="articleService" class="wiki.laona.service.impl.ArticleServiceImpl">
+		<property name="articleDao" ref="articleDao"/>
+	</bean>
 	
 	<!--dao-->
 	<bean id="userDao" class="wiki.laona.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	<bean id="categoryDao" class="wiki.laona.dao.impl.CategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="articleDao" class="wiki.laona.dao.impl.ArticleDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>
