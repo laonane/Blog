@@ -33,7 +33,7 @@ public class Article {
                 ", articleTime=" + articleTime +
                 ", articlePic='" + articlePic + '\'' +
                 ", articleDesc='" + articleDesc + '\'' +
-                // ", category=" + category +
+                ", category=" + category +
                 '}';
     }
 }
