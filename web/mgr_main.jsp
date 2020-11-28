@@ -39,7 +39,8 @@
         </div>
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-input-group am-input-group-sm">
-                <input type="text" class="am-form-field" id="input_search">
+                <input type="text" class="am-form-field" id="input_search"
+                       value="<s:property value="#parameters.keyWord"/>">
                 <span class="am-input-group-btn">
                     <button class="am-btn am-btn-default" type="button" id="input_search_btn">搜索</button>
                 </span>
@@ -52,7 +53,7 @@
     <ul class="title_ul">
         <li>序号</li>
         <li>标题</li>
-        <li>学科</li>
+        <li>分类</li>
         <li>编辑</li>
         <li>删除</li>
     </ul>
@@ -67,7 +68,7 @@
                     <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
             </li>
             <li>
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/article_delete.action?articleId=<s:property value="#article.articleId"/>">
                     <img class="img_icon" src="${ctx }/images/delete_icon.png" alt="">
                 </a>
             </li>
@@ -90,7 +91,9 @@
         totalPage: <s:property value="#pageBean.totalPage"/>,
         totalSize: <s:property value="#pageBean.totalCount"/>,
         callback: function (num) {
-            $(window).attr('location', '/article_pageList.action?currPage=' + num);
+            // 获取搜索的关键字
+            var keyWord = $('#input_search').val();
+            $(window).attr('location', '/article_pageList.action?currPage=' + num + "&keyWord=" + keyWord);
             // alert(num);
         }
     });
@@ -98,6 +101,12 @@
     $("#add").click(function () {
         // alert("aaa");
         $(window).attr('location', '${ctx }/mgr_add_article.jsp');
+    });
+
+    $('#input_search_btn').click(function () {
+        // 获取搜索的关键字
+        var keyWord = $('#input_search').val();
+        $(window).attr('location', '/article_pageList.action?keyWord=' + keyWord);
     });
 </script>
 

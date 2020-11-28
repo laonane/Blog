@@ -48,4 +48,10 @@ public interface IArticleDao {
      * @return 当前页的所有文章数据
      */
     List<Article> getPageData(DetachedCriteria detachedCriteria, Integer index, Integer pageSize);
+
+    /**
+     * 根据删除文章
+     * @param article 文章实体
+     */
+    void deleteArticleById(Article article);
 }

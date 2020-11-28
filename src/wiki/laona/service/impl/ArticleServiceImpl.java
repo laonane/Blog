@@ -3,6 +3,7 @@ package wiki.laona.service.impl;
 import com.sun.corba.se.impl.oa.toa.TOA;
 import lombok.Setter;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.dao.IArticleDao;
 import wiki.laona.domain.Article;
 import wiki.laona.domain.PageBean;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author: HuaiAnGG
  * @create: 2020-11-27 09:38
  **/
+@Transactional
 public class ArticleServiceImpl<articlePageBean> implements IArticleService {
 
     @Setter
@@ -56,7 +58,17 @@ public class ArticleServiceImpl<articlePageBean> implements IArticleService {
         List<Article> pageArticle =  articleDao.getPageData(detachedCriteria, pageBean.getIndex(), pageBean.getPageSize());
         // 计算
         pageBean.setList(pageArticle);
-        System.out.println("pageBean = " + pageBean);
         return pageBean;
     }
+
+    /**
+     * 删除文章信息
+     *
+     * @param article
+     */
+    @Override
+    public void deleteArticle(Article article) {
+        articleDao.deleteArticleById(article);
+    }
+
 }

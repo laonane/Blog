@@ -28,4 +28,10 @@ public interface IArticleService {
      * @return 分页数据列表
      */
     PageBean<Article> getPageData(DetachedCriteria detachedCriteria, Integer currPage, int pageSize);
+
+    /**
+     * 删除文章信息
+     * @param articleId 文章 id
+     */
+    void deleteArticle(Article article);
 }

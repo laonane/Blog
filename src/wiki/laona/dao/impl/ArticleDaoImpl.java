@@ -76,4 +76,14 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements IArticleDao {
         return (List<Article>) this.getHibernateTemplate().findByCriteria(detachedCriteria, index , pageSize);
     }
 
+    /**
+     * 根据删除文章
+     *
+     * @param article 文章实体
+     */
+    @Override
+    public void deleteArticleById(Article article) {
+        this.getHibernateTemplate().delete(article);
+    }
+
 }
