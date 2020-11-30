@@ -6,6 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.dao.IArticleDao;
 import wiki.laona.domain.Article;
+import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 import wiki.laona.service.IArticleService;
 
@@ -69,6 +70,17 @@ public class ArticleServiceImpl<articlePageBean> implements IArticleService {
     @Override
     public void deleteArticle(Article article) {
         articleDao.deleteArticleById(article);
+    }
+
+    /**
+     * 根据 parentId 查询文章分类
+     *
+     * @param parentId 文章父类 id
+     * @return 分类信息
+     */
+    @Override
+    public List<Category> getCategory(Integer parentId) {
+        return articleDao.getArticleCategory(parentId);
     }
 
 }

@@ -1,14 +1,21 @@
 package wiki.laona.web;
 
+import com.mysql.cj.xdevapi.JsonArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import lombok.Setter;
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.domain.Article;
+import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 import wiki.laona.service.IArticleService;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,6 +49,12 @@ public class ArticleAction extends ActionSupport {
      */
     @Setter
     private Integer articleId;
+
+    /**
+     * 分类父级id
+     */
+    @Setter
+    private Integer parentId;
 
     /**
      * 所有文章数据获取
@@ -83,5 +96,23 @@ public class ArticleAction extends ActionSupport {
         article.setArticleId(articleId);
         articleService.deleteArticle(article);
         return "delete_article";
+    }
+
+
+    /**
+     * 获取文章父类分类信息
+     *
+     * @return 文章父类分类信息
+     */
+    public String getCategory() throws IOException {
+
+        // 根据 parentId 查询分类
+        List<Category> categoryList = articleService.getCategory(parentId);
+        // 封装成 json
+        JSONArray jsonArray = JSONArray.fromObject(categoryList, new JsonConfig());
+        // 响应给浏览器
+        ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
+        ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
+        return null;
     }
 }

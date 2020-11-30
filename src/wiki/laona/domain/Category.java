@@ -14,14 +14,14 @@ import lombok.Setter;
 public class Category {
     private Integer cid;
     private String cname;
-    private String parentId;
+    private String parentid;
 
     @Override
     public String toString() {
         return "Category{" +
                 "cid=" + cid +
                 ", cname='" + cname + '\'' +
-                ", parentId='" + parentId + '\'' +
+                ", parentid=" + parentid + '\'' +
                 '}';
     }
 }

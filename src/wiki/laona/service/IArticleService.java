@@ -2,6 +2,7 @@ package wiki.laona.service;
 
 import org.hibernate.criterion.DetachedCriteria;
 import wiki.laona.domain.Article;
+import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 
 import java.util.List;
@@ -31,7 +32,14 @@ public interface IArticleService {
 
     /**
      * 删除文章信息
-     * @param articleId 文章 id
+     * @param article 文章实体(包含 id )
      */
     void deleteArticle(Article article);
+
+    /**
+     * 根据 parentId 查询文章分类
+     * @param parentId 文章父类 id
+     * @return 分类信息
+     */
+    List<Category> getCategory(Integer parentId);
 }

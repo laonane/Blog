@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
     <style>
         body{
             border-top: 1px solid;
@@ -81,7 +81,7 @@
 <ul>
     <li><a href="${pageContext.request.contextPath}/category_list.action" target="mainFrame"><i></i>分类管理</a></li>
     <li><a href="${pageContext.request.contextPath}/article_pageList.action" target="mainFrame"><i></i>文章管理</a></li>
-    <li></i><a href="mgr_account.jsp" target="mainFrame"><i></i>用户管理</a></li>
+    <li></i><a href="${pageContext.request.contextPath}/mgr_account.jsp" target="mainFrame"><i></i>用户管理</a></li>
 </ul>
 
 </body>

@@ -1,13 +1,20 @@
 package wiki.laona.dao.impl;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import wiki.laona.dao.IArticleDao;
 import wiki.laona.domain.Article;
+import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -73,7 +80,7 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements IArticleDao {
     public List<Article> getPageData(DetachedCriteria detachedCriteria, Integer index, Integer pageSize) {
         // detachedCriteria 中在获取总记录数的时候 设置了条件，需要重置一下这个查询条件
         detachedCriteria.setProjection(null);
-        return (List<Article>) this.getHibernateTemplate().findByCriteria(detachedCriteria, index , pageSize);
+        return (List<Article>) this.getHibernateTemplate().findByCriteria(detachedCriteria, index, pageSize);
     }
 
     /**
@@ -84,6 +91,21 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements IArticleDao {
     @Override
     public void deleteArticleById(Article article) {
         this.getHibernateTemplate().delete(article);
+    }
+
+    /**
+     * 根据 id 获取分类信息
+     *
+     * @param parentId 父类 id
+     * @return
+     */
+    @Override
+    public List<Category> getArticleCategory(Integer parentId) {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Category.class);
+        detachedCriteria.add(Restrictions.eq("parentid", String.valueOf(parentId)));
+        HibernateTemplate hibernateTemplate = this.getHibernateTemplate();
+        List<Category> categoryList = (List<Category>) hibernateTemplate.findByCriteria(detachedCriteria);
+        return categoryList;
     }
 
 }

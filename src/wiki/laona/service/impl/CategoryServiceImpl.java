@@ -67,12 +67,11 @@ public class CategoryServiceImpl implements ICategoryService {
     /**
      * 通过 id 删除分类信息
      *
-     * @param cid 分类 id
+     * @param category 分类实体(包含 id)
      */
     @Override
     public void deleteCategory(Category category) {
         categoryDao.deleteCategoryById(category);
     }
-
 
 }

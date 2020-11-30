@@ -75,14 +75,11 @@
         </ul>
     </s:iterator>
 
-    <s:debug/>
-
     <!--分页-->
     <div id="page" class="page_div"></div>
 </div>
-
-<script src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/paging.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 <script>
 
     //分页
@@ -99,8 +96,7 @@
     });
 
     $("#add").click(function () {
-        // alert("aaa");
-        $(window).attr('location', '${ctx }/mgr_add_article.jsp');
+        $(window).attr('location','${ctx }/mgr_add_article.jsp');
     });
 
     $('#input_search_btn').click(function () {

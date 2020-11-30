@@ -7,8 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>博客后台管理系统</title>
-    <link href="../favicon.ico" rel="shortcut icon">
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
 </head>
 
 <body>
