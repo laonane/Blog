@@ -83,4 +83,14 @@ public class ArticleServiceImpl<articlePageBean> implements IArticleService {
         return articleDao.getArticleCategory(parentId);
     }
 
+    /**
+     * 保存文章
+     *
+     * @param article 文章实体
+     */
+    @Override
+    public void save(Article article) {
+        articleDao.saveArticle(article);
+    }
+
 }

@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="${ctx }/css/style.css" type="text/css"/>
     <link rel="stylesheet" href="${ctx }/css/amazeui.min.css"/>
     <script src="${ctx }/js/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx }/js/umedit/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx }/js/umedit/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${ctx }/js/umedit/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 
@@ -24,25 +27,25 @@
         </strong><small></small></div>
     </div>
     <hr>
-    <form id="blog_form" action="#" method=post>
+    <form id="blog_form" action="${ctx}/article_add.action" method="post" enctype="multipart/form-data">
         <div class="edit_content">
             <div class="item1">
                 <div>
                     <span>文章标题：</span>
-                    <input type="text" class="am-form-field" name="article_title" style="width: 300px">&nbsp;&nbsp;
+                    <input type="text" class="am-form-field" name="articleTitle" style="width: 300px">&nbsp;&nbsp;
                 </div>
             </div>
 
-            <input type="text" name="article_desc" id="article_desc" style="display: none;">
+            <input type="text" name="articleDesc" id="article_desc" style="display: none;">
 
 
             <div class="item1">
                 <span>所属分类：</span>
-                <select id="category_select" name="bclass.cid" style="width: 150px">&nbsp;&nbsp;
+                <select id="category_select" name="categoryParentId" style="width: 150px">&nbsp;&nbsp;
                     　
                 </select>
 
-                <select id="skill_select" name="skill.sid" style="width: 150px">&nbsp;&nbsp;
+                <select id="skill_select" name="categoryCid" style="width: 150px">&nbsp;&nbsp;
                 </select>
 
             </div>
@@ -54,7 +57,7 @@
                 <input type="file" name="upload" id="fileupload"/>
             </div>
 
-            <div id="editor" name="article_content" style="width:900px;height:400px;"></div>
+            <div id="editor" name="articleContent" style="width:900px;height:400px;"></div>
             <button class="am-btn am-btn-default" type="button" id="send" style="margin-top: 10px;">
                 发布
             </button>
@@ -68,9 +71,13 @@
 
     $(function () {
 
+        /**
+         * 初始化富文本编辑器
+         * */
+        var ue = UE.getEditor('editor');
+
         // 发送请求获取分类的数据
         $.post("${pageContext.request.contextPath}/article_getCategory.action", {"parentId": 0}, function (data) {
-            console.log(data);
             // 遍历数组 data
             $(data).each(function (i, obj) {
                 // console.log(obj.cname);
@@ -87,7 +94,7 @@
             // 获取 分类 id
             var cid = $('#category_select').val();
             // 发送请求获取分类的数据
-            $.post("${pageContext.request.contextPath}/article_getCategory.action", {"parentId": cid}, function (data) {
+            $.post("${pageContext.request.contextPath}/article_getCategory.action", {"parentId": cid }, function (data) {
                 // console.log(data);
                 $('#skill_select').empty();
                 // 遍历数组 data
@@ -117,6 +124,18 @@
                 $('#imageview').height("200px");
                 $('.update_pic').attr('style', 'margin-bottom: 80px;');
             }
+        });
+
+        $('#send').click(function () {
+            // 设置文本描述
+            // 获取富文本的正文
+            var text = ue.getContentTxt();
+            text = text.substring(0, 150) + "...";
+            // 填充到描述信息中
+            $('#article_desc').val(text);
+
+            // 提交表单
+            $('#blog_form').submit();
         });
     });
 

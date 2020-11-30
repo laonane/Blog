@@ -61,6 +61,7 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
     public String updateUI() throws IOException {
         Integer cid = category.getCid();
         Category getCategory = categoryService.getCategory(cid);
+        System.out.println("CategoryAction.updateUI");
         System.out.println("getCategory = " + getCategory);
         // 格式化 json
         JSONArray jsonArray = JSONArray.fromObject(getCategory, new JsonConfig());

@@ -42,4 +42,10 @@ public interface IArticleService {
      * @return 分类信息
      */
     List<Category> getCategory(Integer parentId);
+
+    /**
+     * 保存文章
+     * @param article 文章实体
+     */
+    void save(Article article);
 }

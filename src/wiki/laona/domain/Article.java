@@ -16,7 +16,7 @@ public class Article {
     private Integer articleId;
     private String articleTitle;
     private String articleContext;
-    private Integer articleTime;
+    private Long articleTime;
     private String articlePic;
     private String articleDesc;
     /**

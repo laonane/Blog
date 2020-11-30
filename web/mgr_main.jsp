@@ -68,7 +68,7 @@
                     <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/article_delete.action?articleId=<s:property value="#article.articleId"/>">
+                <a href="${pageContext.request.contextPath}/article_delete.action?article.articleId=<s:property value="#article.articleId"/>">
                     <img class="img_icon" src="${ctx }/images/delete_icon.png" alt="">
                 </a>
             </li>

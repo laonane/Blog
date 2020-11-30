@@ -62,4 +62,10 @@ public interface IArticleDao {
      * @return
      */
     List<Category> getArticleCategory(Integer parentId);
+
+    /**
+     * 保存文章到数据库
+     * @param article 文章实体
+     */
+    void saveArticle(Article article);
 }

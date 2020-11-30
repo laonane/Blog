@@ -1,12 +1,8 @@
 package wiki.laona.dao.impl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import wiki.laona.dao.IArticleDao;
@@ -14,7 +10,6 @@ import wiki.laona.domain.Article;
 import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 
-import java.awt.*;
 import java.util.List;
 
 /**
@@ -102,10 +97,20 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements IArticleDao {
     @Override
     public List<Category> getArticleCategory(Integer parentId) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Category.class);
-        detachedCriteria.add(Restrictions.eq("parentid", String.valueOf(parentId)));
+        detachedCriteria.add(Restrictions.eq("parentid",parentId));
         HibernateTemplate hibernateTemplate = this.getHibernateTemplate();
         List<Category> categoryList = (List<Category>) hibernateTemplate.findByCriteria(detachedCriteria);
         return categoryList;
+    }
+
+    /**
+     * 保存文章到数据库
+     *
+     * @param article 文章实体
+     */
+    @Override
+    public void saveArticle(Article article) {
+        this.getHibernateTemplate().save(article);
     }
 
 }

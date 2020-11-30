@@ -16,7 +16,10 @@
 	<!--核心过滤器-->
 	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<!--默认过滤器-->
+		<!--<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>-->
+		<!--自定义的过滤器，不处理富文本编辑器请求-->
+		<filter-class>wiki.laona.web.filter.MyStrutsFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
