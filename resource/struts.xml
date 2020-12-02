@@ -46,8 +46,9 @@
 		<!--文章列表-->
 		<action name="article_*" class="wiki.laona.web.ArticleAction" method="{1}">
 			<result name="list">/mgr_main.jsp</result>
+			<result name="edit_article">/mgr_edit_article.jsp</result>
 			<result name="list_res" type="redirectAction">article_pageList.action</result>
-			<allowed-methods>list, pageList, delete, getCategory, add</allowed-methods>
+			<allowed-methods>list, pageList, delete, getCategory, add, edit, update</allowed-methods>
 		</action>
 	
 	</package>

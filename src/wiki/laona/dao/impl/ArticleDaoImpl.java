@@ -97,7 +97,7 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements IArticleDao {
     @Override
     public List<Category> getArticleCategory(Integer parentId) {
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Category.class);
-        detachedCriteria.add(Restrictions.eq("parentid",parentId));
+        detachedCriteria.add(Restrictions.eq("parentid", parentId));
         HibernateTemplate hibernateTemplate = this.getHibernateTemplate();
         List<Category> categoryList = (List<Category>) hibernateTemplate.findByCriteria(detachedCriteria);
         return categoryList;
@@ -111,6 +111,33 @@ public class ArticleDaoImpl extends HibernateDaoSupport implements IArticleDao {
     @Override
     public void saveArticle(Article article) {
         this.getHibernateTemplate().save(article);
+    }
+
+    /**
+     * 获取文章信息
+     *
+     * @param article 文章实体（包含文章 id）
+     * @return 文章实体
+     */
+    @Override
+    public Article getArticle(Article article) {
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Article.class);
+        detachedCriteria.add(Restrictions.eq("articleId", article.getArticleId()));
+        List<Article> articleList = (List<Article>) this.getHibernateTemplate().findByCriteria(detachedCriteria);
+        if (articleList.size() > 0) {
+            return articleList.get(0);
+        }
+        return null;
+    }
+
+    /**
+     * 更新数据库文章信息
+     *
+     * @param article 文章信息
+     */
+    @Override
+    public void updateArticle(Article article) {
+        this.getHibernateTemplate().update(article);
     }
 
 }

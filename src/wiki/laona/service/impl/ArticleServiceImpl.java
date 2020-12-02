@@ -1,6 +1,5 @@
 package wiki.laona.service.impl;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
 import lombok.Setter;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +18,7 @@ import java.util.List;
  * @create: 2020-11-27 09:38
  **/
 @Transactional
-public class ArticleServiceImpl<articlePageBean> implements IArticleService {
+public class ArticleServiceImpl implements IArticleService {
 
     @Setter
     private IArticleDao articleDao;
@@ -91,6 +90,27 @@ public class ArticleServiceImpl<articlePageBean> implements IArticleService {
     @Override
     public void save(Article article) {
         articleDao.saveArticle(article);
+    }
+
+    /**
+     * 获取编辑文章信息
+     *
+     * @param article 文章实体( 内含文章 id )
+     * @return 文章实体
+     */
+    @Override
+    public Article getArticle(Article article) {
+        return articleDao.getArticle(article);
+    }
+
+    /**
+     * 更新文章详情
+     *
+     * @param article 文章实体
+     */
+    @Override
+    public void update(Article article) {
+        articleDao.updateArticle(article);
     }
 
 }

@@ -68,4 +68,17 @@ public interface IArticleDao {
      * @param article 文章实体
      */
     void saveArticle(Article article);
+
+    /**
+     * 获取文章信息
+     * @param article 文章实体（包含文章 id）
+     * @return 文章实体
+     */
+    Article getArticle(Article article);
+
+    /**
+     * 更新数据库文章信息
+     * @param article 文章信息
+     */
+    void updateArticle(Article article);
 }

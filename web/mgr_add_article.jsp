@@ -121,8 +121,8 @@
             if ($('#imageview').attr('style') === 'display: none;') {
                 $('#imageview').attr('style', 'inline');
                 $('#imageview').width("300px");
-                $('#imageview').height("200px");
-                $('.update_pic').attr('style', 'margin-bottom: 80px;');
+                $('#imageview').height("180px");
+                $('.update_pic').attr('style', 'margin-bottom: 150px;');
             }
         });
 

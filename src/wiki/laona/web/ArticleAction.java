@@ -1,11 +1,13 @@
 package wiki.laona.web;
 
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import lombok.Setter;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -26,7 +28,7 @@ import java.util.UUID;
  * @author: HuaiAnGG
  * @create: 2020-11-27 09:33
  **/
-public class ArticleAction extends ActionSupport{
+public class ArticleAction extends ActionSupport {
 
     /**
      * 文章服务接口
@@ -106,16 +108,11 @@ public class ArticleAction extends ActionSupport{
     @Setter
     private Integer categoryParentId;
 
-    // /**
-    //  * 文章实体
-    //  */
-    // @Setter
-    // private Article article;
-    //
-    // @Override
-    // public Article getModel() {
-    //     return this.article;
-    // }
+    /**
+     * 修改文章的图片地址
+     */
+    @Setter
+    private String articlePic;
 
     /**
      * 所有文章数据获取
@@ -123,9 +120,7 @@ public class ArticleAction extends ActionSupport{
      * @return 所有文章列表
      */
     public String list() {
-        System.out.println("ArticleAction.list");
         List<Article> articleList = articleService.getAll();
-        System.out.println("articleList = " + articleList);
         ActionContext.getContext().put("articleList", articleList);
         return "list";
     }
@@ -153,6 +148,8 @@ public class ArticleAction extends ActionSupport{
      * @return 删除后的文章列表
      */
     public String delete() {
+        System.out.println("ArticleAction.delete");
+        System.out.println("articleId = " + articleId);
         Article article2 = new Article();
         article2.setArticleId(articleId);
         articleService.deleteArticle(article2);
@@ -168,11 +165,8 @@ public class ArticleAction extends ActionSupport{
     public String getCategory() throws IOException {
         // 根据 parentId 查询分类
         List<Category> categoryList = articleService.getCategory(parentId);
-        System.out.println("ArticleAction.getCategory");
-        System.out.println("categoryList = " + categoryList);
         // 封装成 json
         JSONArray jsonArray = JSONArray.fromObject(categoryList, new JsonConfig());
-        System.out.println("jsonArray = " + jsonArray);
         // 响应给浏览器
         ServletActionContext.getResponse().setContentType("text/html;charset=utf-8");
         ServletActionContext.getResponse().getWriter().println(jsonArray.toString());
@@ -186,7 +180,7 @@ public class ArticleAction extends ActionSupport{
      */
     public String add() throws IOException {
         // 把参数保存到 article 对象中
-        Category  category = new Category();
+        Category category = new Category();
         category.setCid(categoryCid);
         category.setParentid(categoryParentId);
 
@@ -197,34 +191,100 @@ public class ArticleAction extends ActionSupport{
         article.setCategory(category);
         // 上传文件
         if (upload != null) {
-            // 随机生成文件名称
-            // 1. 获取文件扩展名
-            int index = uploadFileName.lastIndexOf(".");
-            String etx = uploadFileName.substring(index);
-
-            // 2. 生成随机文件名 拼接扩展名
-            String uuid = UUID.randomUUID().toString();
-            // 去掉 uuid 中的横杠
-            String uuidFileName
-                    = uuid.replace("-", "") + etx;
-
-            // 确定上传路径
-            String path = ServletActionContext.getServletContext().getRealPath("/upload");
-            File file = new File(path);
-            if (!file.exists()) {
-                // 不存在就创建文件路径
-                file.mkdirs();
-            }
-            // 拼接新的文件路径
-            File desFile = new File(path + "/" + uuidFileName);
-            FileUtils.copyFile(upload, desFile);
-            // 设置图片
-            article.setArticlePic(uuidFileName);
-            // 设置当前时间
-            article.setArticleTime(new Date().getTime());
+            uploadImage(article);
         }
         articleService.save(article);
         return "list_res";
     }
 
+    /**
+     * 文章编辑
+     *
+     * @return 文章数据
+     */
+    public String edit() {
+        Article article = new Article();
+        article.setArticleId(articleId);
+        // 查询文章
+        Article res = articleService.getArticle(article);
+        // System.out.println("res = " + res);
+        // 保存文章信息
+        ActionContext.getContext().put("res", res);
+        return "edit_article";
+    }
+
+
+    /**
+     * 更新文章信息
+     *
+     * @return 文章信息
+     */
+    public String update() throws IOException {
+        // 把参数保存到 article 对象中
+        Category category = new Category();
+        category.setCid(categoryCid);
+        category.setParentid(categoryParentId);
+
+        Article article = new Article();
+        article.setArticleId(articleId);
+        article.setArticleTitle(articleTitle);
+        article.setArticleContext(articleContent);
+        article.setArticleDesc(articleDesc);
+        // 设置图片
+        article.setArticlePic(articlePic);
+
+        article.setCategory(category);
+        // 是否已经替换新的图片,如果有就删除原图片
+        if (upload != null) {
+            String path = ServletActionContext.getServletContext().getRealPath("/upload/");
+            String pic_image = articlePic;
+            if (!StringUtils.isEmpty(pic_image)) {
+                File file = new File(path + "/" + pic_image);
+                file.delete();
+            }
+            this.uploadImage(article);
+        }
+
+        // 设置当前时间
+        article.setArticleTime(System.currentTimeMillis());
+
+        articleService.update(article);
+
+        return "list_res";
+    }
+
+
+    /**
+     * 上传图片
+     *
+     * @param article 文章实体
+     * @throws IOException IO异常
+     */
+    private void uploadImage(Article article) throws IOException {
+        // 随机生成文件名称
+        // 1. 获取文件扩展名
+        int index = uploadFileName.lastIndexOf(".");
+        String etx = uploadFileName.substring(index);
+
+        // 2. 生成随机文件名 拼接扩展名
+        String uuid = UUID.randomUUID().toString();
+        // 去掉 uuid 中的横杠
+        String uuidFileName
+                = uuid.replace("-", "") + etx;
+
+        // 确定上传路径
+        String path = ServletActionContext.getServletContext().getRealPath("/upload/");
+        File file = new File(path);
+        if (!file.exists()) {
+            // 不存在就创建文件路径
+            file.mkdirs();
+        }
+        // 拼接新的文件路径
+        File desFile = new File(path + "/" + uuidFileName);
+        FileUtils.copyFile(upload, desFile);
+        // 设置图片
+        article.setArticlePic(uuidFileName);
+        // 设置当前时间
+        article.setArticleTime(new Date().getTime());
+    }
 }

@@ -3,9 +3,6 @@
 *.iml
 *.ipr
 *.iws
-resource/rebel.xml
-resource/rebel-remote.xml
-src/errlog/
 
 # Eclipe
 .project
@@ -25,3 +22,11 @@ sshj.jar
 # MacOS X
 .DS_Store
 /src/errlog/
+
+
+# this project
+resource/rebel.xml
+resource/rebel-remote.xml
+src/errlog/
+web/ueditor/jsp/upload/image/
+web/upload/
