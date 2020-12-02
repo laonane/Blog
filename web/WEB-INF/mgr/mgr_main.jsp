@@ -96,7 +96,7 @@
     });
 
     $("#add").click(function () {
-        $(window).attr('location','${ctx }/mgr_add_article.jsp');
+        $(window).attr('location','${ctx }/location_add_article.action');
     });
 
     $('#input_search_btn').click(function () {

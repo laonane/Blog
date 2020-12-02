@@ -100,6 +100,8 @@
             });
             // 触发 change 事件
             // $('#category_select').trigger("change");
+            //设置父类默认分类
+            $("#category_select option[value=<s:property value="#res.category.parentid"/>]").prop("selected", true);
         }, "json");
 
         var _parentId = <s:property value="#res.category.parentid"/>;
@@ -110,8 +112,6 @@
                 // console.log(obj.cname);
                 $('#skill_select').append('<option value=' + obj.cid + '>' + obj.cname + '</option>')
             });
-            //设置父类默认分类
-            $("#category_select option[value=<s:property value="#res.category.parentid"/>]").prop("selected", true);
             //设置子类默认分类
             $("#skill_select option[value=<s:property value="#res.category.cid"/>]").prop("selected", true);
         }, "json");

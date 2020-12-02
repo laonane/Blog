@@ -65,12 +65,12 @@
             <li><s:property value="#category.cname"/></li>
             <li>
                 <a href="#" class="edit_btn" data-id="<s:property value='#category.cid'/>">
-                    <img class="img_icon" src="images/edit_icon.png" alt="">
+                    <img class="img_icon" src="../../images/edit_icon.png" alt="">
                 </a>
             </li>
             <li>
                 <a href="#" class="delete_btn" data-id="<s:property value='#category.cid'/>" >
-                    <img class="img_icon"src="images/delete_icon.png" alt="">
+                    <img class="img_icon" src="../../images/delete_icon.png" alt="">
                 </a>
             </li>
         </ul>
@@ -84,7 +84,7 @@
 </div>
 
 <div id="modal_content2" style="height: 250px; display: none">
-    <div id="close2"><img src="images/delete_icon.png" alt=""></div>
+    <div id="close2"><img src="../../images/delete_icon.png" alt=""></div>
     <div class="edit_content">
         <div class="item1">
             <div>
