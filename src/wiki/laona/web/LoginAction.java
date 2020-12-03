@@ -42,6 +42,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<User> {
      */
     public String login() {
         User user = loginService.login(this.user);
+        // System.out.println("user = " + user);
         // 用户登录成功
         if (user != null) {
             ActionContext.getContext().getSession().put("curUser", user);
@@ -59,7 +60,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<User> {
      * @return 退出功能
      */
     public String loginOut() {
-        System.out.println(user.getUsername() + "  用户退出。");
+        // User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+        // System.out.println(curUser.getUsername() + "  用户退出。");
         // 清楚用户信息
         ActionContext.getContext().getSession().remove("curUser");
         return "login_out";
