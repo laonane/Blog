@@ -110,10 +110,11 @@
     flex-direction: row;
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 10px;
+    justify-content: space-between;
 }
 
 #lk_blog_list .blog-list li .blog-list-left{
-    margin-right: 20px;
+    margin-right: 280px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

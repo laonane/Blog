@@ -22,8 +22,8 @@
 			<result name="top">/WEB-INF/mgr/mgr_top.jsp</result>
 			<result name="account">/WEB-INF/mgr/mgr_account.jsp</result>
 			<result name="add_article">/WEB-INF/mgr/mgr_add_article.jsp</result>
-			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 			<allowed-methods>left,top,account,add_article</allowed-methods>
 		</action>
 		
@@ -71,13 +71,21 @@
 		</action>
 		
 		<!--文章列表-->
-		<action name="article_*" class="wiki.laona.web.ArticleAction" method="{1}">
+		<action name="article_*" class="articleAction" method="{1}">
 			<result name="list">/WEB-INF/mgr/mgr_main.jsp</result>
 			<result name="edit_article">/WEB-INF/mgr/mgr_edit_article.jsp</result>
 			<result name="list_res" type="redirectAction">article_pageList.action</result>
-			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="loginInterceptor">
+				<!--允许放行的方法-->
+				<param name="excludeMethods">getCategory</param>
+			</interceptor-ref>
 			<interceptor-ref name="defaultStack"/>
 			<allowed-methods>list, pageList, delete, getCategory, add, edit, update</allowed-methods>
+		</action>
+		
+	<!--	前端页面 action -->
+		<action name="web_*" class="webAction" method="{1}">
+			<allowed-methods>getPageList</allowed-methods>
 		</action>
 	
 	</package>

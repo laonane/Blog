@@ -28,3 +28,4 @@ sshj.jar
 /resource/rebel.xml
 /resource/rebel-remote.xml
 /web/upload/
+/web/ueditor/jsp/upload/image

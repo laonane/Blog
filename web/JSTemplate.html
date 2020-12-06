@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/template.js"></script>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script id="my_tpl" type="text/html">
+    <h1>{{title}}</h1>
+    {{if isAdmin}}
+    <p>{{score}}</p>
+    {{/if}}
+
+    {{each list as value}}
+        <li>{{value}}</li>
+    {{/each}}
+</script>
+
+<script>
+    var data = {
+        title: 'laona',
+        isAdmin: true,
+        score: 90,
+        list: ['1', '22', '333', '4444']
+    }
+
+    var html = template('my_tpl', data);
+
+    document.getElementById('content').innerHTML = html;
+</script>
+</body>
+</html>
