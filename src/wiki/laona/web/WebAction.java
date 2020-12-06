@@ -2,7 +2,6 @@ package wiki.laona.web;
 
 import com.opensymphony.xwork2.ActionSupport;
 import lombok.Setter;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
@@ -12,7 +11,6 @@ import wiki.laona.domain.PageBean;
 import wiki.laona.service.IArticleService;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 /**
  * @program: Blog
@@ -36,8 +34,6 @@ public class WebAction extends ActionSupport {
 
     /**
      * 前端页面获取页面文章数据
-     *
-     * @return null
      */
     public void getPageList() throws IOException {
         ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");

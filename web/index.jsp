@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@include file="header.jsp" %>
 <head>
@@ -38,18 +38,18 @@
         <article class="mainarea" style="display:block;">
             <div class="blog-tab">
 
-                <div class="tab-content">
-                    <%--<div role="tabpanel" class="tab-pane fade in active" id="tab">
-                        &lt;%&ndash;分类信息&ndash;%&gt;
-                        <div id="lk_blog_two" class="container">
-                            <div class="row">
-                                <button class="btn-tag">Mysql</button>
-                                <button class="btn-tag">面向对象</button>
-                                <button class="btn-tag">jdbc</button>
-                                <button class="btn-tag">web服务器</button>
-                            </div>
-                        </div>
-                    </div>--%>
+                <div class="tab-content" id="tab_content">
+                    <%--                    <div role="tabpanel" class="tab-pane fade in active" id="tab">
+                                            &lt;%&ndash;分类信息&ndash;%&gt;
+                                            <div id="lk_blog_two" class="container">
+                                                <div class="row">
+                                                    <button class="btn-tag">Mysql</button>
+                                                    <button class="btn-tag">面向对象</button>
+                                                    <button class="btn-tag">jdbc</button>
+                                                    <button class="btn-tag">web服务器</button>
+                                                </div>
+                                            </div>
+                                        </div>--%>
                 </div>
             </div>
         </article>
@@ -105,9 +105,26 @@
                 {{article.articleTime | dateFormat:'yyyy-MM-dd'}}
             </div>
         </div>
-        <img src="${pageContext.request.contextPath}/upload/{{article.articlePic}}" alt="" class="img-rounded">
+        <img src='${pageContext.request.contextPath}/upload/{{article.articlePic}}' alt="" class="img-rounded">
     </li>
     {{/each}}
+</script>
+
+<script id="tab_content_template" type="text/html">
+    <div role="tabpanel" class="tab-pane fade in active" id="tab">
+        分类信息
+        <div id="lk_blog_two" class="container">
+            <div class="row">
+                {{each list as tab}}
+                    <button class="btn-tag">{{tab.cname}}</button>
+                {{/each}}
+                <%--
+                <button class="btn-tag">面向对象</button>
+                <button class="btn-tag">jdbc</button>
+                <button class="btn-tag">web服务器</button>--%>
+            </div>
+        </div>
+    </div>
 </script>
 
 <script type="text/javascript">
@@ -142,32 +159,44 @@
         return format;
     });
 
+    // 获取当前参数
+    function getParams(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
 
-    /*    $(function () {
-            $.post('${pageContext.request.contextPath}/web_getPageList.action', function (data) {
-            console.log(data);
-            var html = template('article_content', {list: data.list});
+    // 获取 url 的参数
+    var res = getParams("parentId");
+    // 根据 parentId 加载子集
+    if (res != null) {
+        // 发送请求获取分类的数据
+        $.post("${pageContext.request.contextPath}/article_getCategory.action", {"parentId": res}, function (data) {
+            // 遍历数组 data
+            /*
+                0: {cid: 4, cname: "MySQL", parentid: 1}
+                1: {cid: 5, cname: "web服务器", parentid: 1}
+                2: {cid: 16, cname: "SSH", parentid: 1}
+                3: {cid: 17, cname: "SSM", parentid: 1}
+            */
+            // console.log("发送请求获取分类的数据", data);
+            var html = template('tab_content_template', {list: data});
             // document.getElementById('content').innerHTML = html;
-            $('#content').html(html);
+            $('#tab_content').html(html);
+        }, "json");
+    } else {
+        // 加载列表分页数据
+        // console.log("加载列表分页数据");
+        getPageList(1);
+    }
 
-            //分页
-            $(".page_div").paging({
-                pageNo: data.pageNo,
-                totalPage: data.totalPage,
-                totalSize: data.totalCount,
-                callback: function (num) {
-                    getPageList(num);
-                }
-            });
-        }, 'json');
-    });*/
-
-    // 加载列表分页数据
-    getPageList(1);
 
     function getPageList(currPage) {
         $.post('${pageContext.request.contextPath}/web_getPageList.action', {currPage: currPage}, function (data) {
-            console.log(data);
+            // console.log(data);
             var html = template('article_content', {list: data.list});
             // document.getElementById('content').innerHTML = html;
             $('#content').html(html);
@@ -184,6 +213,3 @@
         }, 'json');
     }
 </script>
-
-</body>
-</html>

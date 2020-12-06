@@ -62,8 +62,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <a class="navbar-brand" href="index.html" style="margin-left: 180px">
-                <img src="images/lk_logo_sm.png" alt="Logo" width="220">
+            <a class="navbar-brand" href="index.jsp" style="margin-left: 180px">
+                <img src="images/lk_logo_sm.png" alt="Logo" width="220px">
             </a>
 
             <ul class="nav navbar-nav" id="nav" style="font-size: 20px">
@@ -80,7 +80,7 @@
 </nav>
 <!--banner-->
 <section id="lk_blog_one">
-    <img src="${pageContext.request.contextPath}/images/about_java.png" alt="" class="one-img" width="280">
+    <img src="${pageContext.request.contextPath}/images/about_java.png" alt="" class="one-img" width="280px">
     <div class="one-right">
         <h1>技术专栏</h1>
         <span>喜欢编程,就来老衲的大清吧!</span>
@@ -101,8 +101,8 @@
             // 遍历数组 data
             $(data).each(function (i, obj) {
                 // console.log(obj.cname);
-                console.log(obj.cname);
-                $('.nav').append('<li class="active"><a href="index.jsp">' + obj.cname + '</a></li>');
+                console.log(obj);
+                $('.nav').append("<li class='active'><a href='index.jsp?parentId=" + obj.cid + "'>" + obj.cname + "</a></li>");
             });
         }, "json");
     });
