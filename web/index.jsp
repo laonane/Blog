@@ -116,7 +116,7 @@
         <div id="lk_blog_two" class="container">
             <div class="row">
                 {{each list as tab}}
-                    <button class="btn-tag">{{tab.cname}}</button>
+                <button class="btn-tag">{{tab.cname}}</button>
                 {{/each}}
                 <%--
                 <button class="btn-tag">面向对象</button>
@@ -170,11 +170,11 @@
     }
 
     // 获取 url 的参数
-    var res = getParams("parentId");
+    var parentId = getParams("parentId");
     // 根据 parentId 加载子集
-    if (res != null) {
+    if (parentId != null) {
         // 发送请求获取分类的数据
-        $.post("${pageContext.request.contextPath}/article_getCategory.action", {"parentId": res}, function (data) {
+        $.post("${pageContext.request.contextPath}/article_getCategory.action", {"parentId": parentId}, function (data) {
             // 遍历数组 data
             /*
                 0: {cid: 4, cname: "MySQL", parentid: 1}
@@ -186,16 +186,23 @@
             var html = template('tab_content_template', {list: data});
             // document.getElementById('content').innerHTML = html;
             $('#tab_content').html(html);
+
+            // 加载子集数据
+            getPageList(1, parentId);
+
         }, "json");
     } else {
         // 加载列表分页数据
         // console.log("加载列表分页数据");
-        getPageList(1);
+        getPageList(1, null);
     }
 
 
-    function getPageList(currPage) {
-        $.post('${pageContext.request.contextPath}/web_getPageList.action', {currPage: currPage}, function (data) {
+    function getPageList(currPage, parentId) {
+        $.post('${pageContext.request.contextPath}/web_getPageList.action', {
+            currPage: currPage,
+            parentId: parentId
+        }, function (data) {
             // console.log(data);
             var html = template('article_content', {list: data.list});
             // document.getElementById('content').innerHTML = html;
@@ -206,8 +213,8 @@
                 pageNo: data.currentPage,
                 totalPage: data.totalPage,
                 totalSize: data.totalCount,
-                callback: function (num) {
-                    getPageList(num);
+                callback: function (num, parentId) {
+                    getPageList(num, parentId);
                 }
             });
         }, 'json');
