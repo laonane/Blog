@@ -61,8 +61,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <a class="navbar-brand" href="index.jsp" style="margin-left: 180px">
-                <img src="images/lk_logo_sm.png" alt="Logo" width="220px">
+            <a class="navbar-brand" href="index.jsp" style="justify-content: space-around">
+                <img src="${pageContext.request.contextPath}/images/laonadedaqing.png" alt="Logo" width="220px">
             </a>
 
             <ul class="nav navbar-nav" id="nav" style="font-size: 20px">
@@ -85,7 +85,7 @@
         <span>喜欢编程,就来老衲的大清吧!</span>
         <div style="position: relative;" class="one-bottom">
             <button>关注我们</button>
-            <img src="images/ewm2.jpg" alt="" width="100px" class="one-ewm">
+            <img src="${pageContext.request.contextPath}/images/ewm2.png" alt="" width="100px" class="one-ewm">
         </div>
     </div>
 </section>
