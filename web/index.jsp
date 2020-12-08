@@ -39,17 +39,19 @@
             <div class="blog-tab">
 
                 <div class="tab-content" id="tab_content">
-                    <%--                    <div role="tabpanel" class="tab-pane fade in active" id="tab">
-                                            &lt;%&ndash;分类信息&ndash;%&gt;
-                                            <div id="lk_blog_two" class="container">
-                                                <div class="row">
-                                                    <button class="btn-tag">Mysql</button>
-                                                    <button class="btn-tag">面向对象</button>
-                                                    <button class="btn-tag">jdbc</button>
-                                                    <button class="btn-tag">web服务器</button>
-                                                </div>
-                                            </div>
-                                        </div>--%>
+                <%--
+                    <div role="tabpanel" class="tab-pane fade in active" id="tab">
+                        &lt;%&ndash;分类信息&ndash;%&gt;
+                        <div id="lk_blog_two" class="container">
+                            <div class="row">
+                                <button class="btn-tag">Mysql</button>
+                                <button class="btn-tag">面向对象</button>
+                                <button class="btn-tag">jdbc</button>
+                                <button class="btn-tag">web服务器</button>
+                            </div>
+                        </div>
+                    </div>
+                --%>
                 </div>
             </div>
         </article>
@@ -98,7 +100,7 @@
     <li class="content_item">
         <div class="blog-list-left" style="float: left;">
             <div class="main-title">
-                <a href="detail.jsp">{{article.articleTitle}}</a>
+                <a href="detail.jsp?id={{article.articleId}}">{{article.articleTitle}}</a>
             </div>
             <p class="sub-title">{{article.articleDesc}}</p>
             <div class="meta">
@@ -116,7 +118,7 @@
         <div id="lk_blog_two" class="container">
             <div class="row">
                 {{each list as tab}}
-                <button class="btn-tag">{{tab.cname}}</button>
+                <button class="btn-tag category_btn" data-cid="{{tab.cid}}">{{tab.cname}}</button>
                 {{/each}}
                 <%--
                 <button class="btn-tag">面向对象</button>
@@ -188,20 +190,31 @@
             $('#tab_content').html(html);
 
             // 加载子集数据
-            getPageList(1, parentId);
+            getPageList(1, parentId, null);
 
         }, "json");
     } else {
         // 加载列表分页数据
         // console.log("加载列表分页数据");
-        getPageList(1, null);
+        getPageList(1, null, null);
     }
 
+    // 这是在顺序执行的时候是直接略过的，需要使用动态代理
+    $('body').on("click", ".category_btn", function () {
+        var cid = $(this).data('cid');
+        getPageList(1, null, cid);
+    })
 
-    function getPageList(currPage, parentId) {
+    /**
+     * 获取分页数据
+     * @param currPage
+     * @param parentId
+     */
+    function getPageList(currPage, parentId, cid) {
         $.post('${pageContext.request.contextPath}/web_getPageList.action', {
             currPage: currPage,
-            parentId: parentId
+            parentId: parentId,
+            cid: cid
         }, function (data) {
             // console.log(data);
             var html = template('article_content', {list: data.list});
@@ -214,7 +227,7 @@
                 totalPage: data.totalPage,
                 totalSize: data.totalCount,
                 callback: function (num, parentId) {
-                    getPageList(num, parentId);
+                    getPageList(num, parentId, cid);
                 }
             });
         }, 'json');

@@ -13,6 +13,7 @@ import wiki.laona.domain.PageBean;
 import wiki.laona.service.IArticleService;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,6 +44,18 @@ public class WebAction extends ActionSupport {
     private Integer parentId;
 
     /**
+     * 子分类 cid
+     */
+    @Setter
+    private Integer cid;
+
+    /**
+     * 文章 articleId
+     */
+    @Setter
+    private Integer articleId;
+
+    /**
      * 前端页面获取页面文章数据
      */
     public void getPageList() throws IOException {
@@ -62,6 +75,10 @@ public class WebAction extends ActionSupport {
             detachedCriteria.add(Restrictions.in("category.cid", cidArr));
         }
 
+        if (cid != null) {
+            detachedCriteria.add(Restrictions.eq("category.cid", cid));
+        }
+
         PageBean<Article> pageBean = articleService.getPageData(detachedCriteria, currPage, 5);
         // 返回 json
         JsonConfig jsonConfig = new JsonConfig();
@@ -69,6 +86,26 @@ public class WebAction extends ActionSupport {
         jsonConfig.setExcludes(new String[]{"handler", "hibernateLazyInitializer"});
         JSONObject jsonObject = JSONObject.fromObject(pageBean, jsonConfig);
         // 响应给页面
+        ServletActionContext.getResponse().getWriter().println(jsonObject.toString());
+    }
+
+    /**
+     * 根据文章 articleId 获取文章详情
+     */
+    public void getArticleDetail() throws IOException {
+        ServletActionContext.getResponse().setContentType("text/json;charset=utf-8");
+        ServletActionContext.getRequest().setCharacterEncoding("utf-8");
+
+        Article article = new Article();
+        article.setArticleId(articleId);
+        Article articleDetail = articleService.getArticle(article);
+
+        // 返回 json
+        JsonConfig jsonConfig = new JsonConfig();
+        // 懒加载配置
+        jsonConfig.setExcludes(new String[]{"handler", "hibernateLazyInitializer"});
+        JSONObject jsonObject = JSONObject.fromObject(articleDetail, jsonConfig);
+
         ServletActionContext.getResponse().getWriter().println(jsonObject.toString());
     }
 }

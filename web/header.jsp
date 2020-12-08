@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <%
     String ctx = request.getContextPath();
@@ -34,8 +33,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://www.itlike.com" target="_blank">
-                        <span class="icon-email"></span>
+                    <a href="http://blog.laona.wiki" target="_blank">
+                        <span class="icon-email" style="color: brown;"></span>
                         blog.laona.wiki
                     </a>
                 </li>
@@ -101,7 +100,7 @@
             // 遍历数组 data
             $(data).each(function (i, obj) {
                 // console.log(obj.cname);
-                console.log(obj);
+                // console.log(obj);
                 $('.nav').append("<li class='active'><a href='index.jsp?parentId=" + obj.cid + "'>" + obj.cname + "</a></li>");
             });
         }, "json");
