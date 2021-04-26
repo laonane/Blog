@@ -1,10 +1,10 @@
 package wiki.laona.service.impl;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
-import lombok.Setter;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.dao.IArticleDao;
 import wiki.laona.domain.Article;
+import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 import wiki.laona.service.IArticleService;
 
@@ -16,9 +16,9 @@ import java.util.List;
  * @author: HuaiAnGG
  * @create: 2020-11-27 09:38
  **/
-public class ArticleServiceImpl<articlePageBean> implements IArticleService {
+@Transactional
+public class ArticleServiceImpl implements IArticleService {
 
-    @Setter
     private IArticleDao articleDao;
 
     /**
@@ -56,7 +56,62 @@ public class ArticleServiceImpl<articlePageBean> implements IArticleService {
         List<Article> pageArticle =  articleDao.getPageData(detachedCriteria, pageBean.getIndex(), pageBean.getPageSize());
         // 计算
         pageBean.setList(pageArticle);
-        System.out.println("pageBean = " + pageBean);
         return pageBean;
+    }
+
+    /**
+     * 删除文章信息
+     *
+     * @param article
+     */
+    @Override
+    public void deleteArticle(Article article) {
+        articleDao.deleteArticleById(article);
+    }
+
+    /**
+     * 根据 parentId 查询文章分类
+     *
+     * @param parentId 文章父类 id
+     * @return 分类信息
+     */
+    @Override
+    public List<Category> getCategory(Integer parentId) {
+        return articleDao.getArticleCategory(parentId);
+    }
+
+    /**
+     * 保存文章
+     *
+     * @param article 文章实体
+     */
+    @Override
+    public void save(Article article) {
+        articleDao.saveArticle(article);
+    }
+
+    /**
+     * 获取编辑文章信息
+     *
+     * @param article 文章实体( 内含文章 id )
+     * @return 文章实体
+     */
+    @Override
+    public Article getArticle(Article article) {
+        return articleDao.getArticle(article);
+    }
+
+    /**
+     * 更新文章详情
+     *
+     * @param article 文章实体
+     */
+    @Override
+    public void update(Article article) {
+        articleDao.updateArticle(article);
+    }
+
+    public void setArticleDao(IArticleDao articleDao) {
+        this.articleDao = articleDao;
     }
 }

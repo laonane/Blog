@@ -7,6 +7,26 @@
 	<constant name="struts.devMode" value="true"/>
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
 	<package name="Blog" extends="struts-default">
+		
+		<!--拦截器-->
+		<interceptors>
+			<interceptor name="loginInterceptor" class="wiki.laona.web.LoginInterceptor"></interceptor>
+		</interceptors>
+		
+		<global-results>
+			<result name="login">/mgr_login.jsp</result>
+		</global-results>
+		
+		<action name="location_*" class="locationAction" method="{1}">
+			<result name="left">/WEB-INF/mgr/mgr_left.jsp</result>
+			<result name="top">/WEB-INF/mgr/mgr_top.jsp</result>
+			<result name="account">/WEB-INF/mgr/mgr_account.jsp</result>
+			<result name="add_article">/WEB-INF/mgr/mgr_add_article.jsp</result>
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<allowed-methods>left,top,account,add_article</allowed-methods>
+		</action>
+		
 		<!--                &lt;!&ndash;全局结果页，如果在action中没有结果页，那就到全局里面找全局结果页&ndash;&gt;
 						<global-results>
 							<result name="login">/login.jsp</result>
@@ -21,11 +41,16 @@
 		<!--登录 action-->
 		<action name="loginAction_*" class="loginAction" method="{1}">
 			<!--登录成功-->
-			<result name="success" type="redirect">/mgr_index.jsp</result>
+			<result name="success">/WEB-INF/mgr/mgr_index.jsp</result>
 			<!--登录失败-->
-			<result name="login">/mgr_login.jsp</result>
+			<!--<result name="login">/mgr_login.jsp</result>-->
 			<!--退出登录-->
 			<result name="login_out" type="redirect">/mgr_login.jsp</result>
+			<interceptor-ref name="loginInterceptor">
+				<!--允许放行的方法-->
+				<param name="excludeMethods">login</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/>
 			<allowed-methods>login, loginOut</allowed-methods>
 		</action>
 		
@@ -37,18 +62,32 @@
 		<action name="category_*" class="categoryAction" method="{1}">
 			<!--<result name="success"  type="redirect">/mgr_category.jsp</result>-->
 			<!--<result name="category_list"  type="redirect">/mgr_category.jsp</result>-->
-			<result name="category_list">/mgr_category.jsp</result>
+			<result name="category_list">/WEB-INF/mgr/mgr_category.jsp</result>
 			<!--重定向到  category_list.action 中-->
 			<result name="list_action" type="redirectAction">category_list.action</result>
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 			<allowed-methods>add, list, updateUI, update</allowed-methods>
 		</action>
 		
 		<!--文章列表-->
-		<action name="article_*" class="wiki.laona.web.ArticleAction" method="{1}">
-			<result name="list">/mgr_main.jsp</result>
-			<allowed-methods>list, pageList</allowed-methods>
+		<action name="article_*" class="articleAction" method="{1}">
+			<result name="list">/WEB-INF/mgr/mgr_main.jsp</result>
+			<result name="edit_article">/WEB-INF/mgr/mgr_edit_article.jsp</result>
+			<result name="list_res" type="redirectAction">article_pageList.action</result>
+			<interceptor-ref name="loginInterceptor">
+				<!--允许放行的方法-->
+				<param name="excludeMethods">getCategory</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"/>
+			<allowed-methods>list, pageList, delete, getCategory, add, edit, update</allowed-methods>
 		</action>
 		
+	<!--	前端页面 action -->
+		<action name="web_*" class="webAction" method="{1}">
+			<allowed-methods>getPageList, getArticleDetail</allowed-methods>
+		</action>
+	
 	</package>
 
 </struts>

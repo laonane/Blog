@@ -14,7 +14,7 @@
 			建立类中的普通属性与数据库当中字段进行关联
 		-->
 		<property name="cname" column="cname"/>
-		<property name="parentId" column="parentid"/>
+		<property name="parentid" column="parentid"/>
 	</class>
 </hibernate-mapping>
 

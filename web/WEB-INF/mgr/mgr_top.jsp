@@ -6,12 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <style>
     .admin_top{
         height: 70px;
-        background:#283643;;
+        background:#283643;
         text-align: right;
         padding-right: 70px;
         color: white;

@@ -39,7 +39,8 @@
         </div>
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-input-group am-input-group-sm">
-                <input type="text" class="am-form-field" id="input_search">
+                <input type="text" class="am-form-field" id="input_search"
+                       value="<s:property value="#parameters.keyWord"/>">
                 <span class="am-input-group-btn">
                     <button class="am-btn am-btn-default" type="button" id="input_search_btn">搜索</button>
                 </span>
@@ -52,7 +53,7 @@
     <ul class="title_ul">
         <li>序号</li>
         <li>标题</li>
-        <li>学科</li>
+        <li>分类</li>
         <li>编辑</li>
         <li>删除</li>
     </ul>
@@ -63,25 +64,22 @@
             <li><s:property value="#article.articleTitle"/></li>
             <li><s:property value="#article.category.cname"/></li>
             <li>
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/article_edit.action?articleId=<s:property value="#article.articleId"/>">
                     <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
             </li>
             <li>
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/article_delete.action?articleId=<s:property value="#article.articleId"/>">
                     <img class="img_icon" src="${ctx }/images/delete_icon.png" alt="">
                 </a>
             </li>
         </ul>
     </s:iterator>
 
-    <s:debug/>
-
     <!--分页-->
     <div id="page" class="page_div"></div>
 </div>
-
-<script src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/paging.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/paging.js"></script>
 <script>
 
     //分页
@@ -90,14 +88,21 @@
         totalPage: <s:property value="#pageBean.totalPage"/>,
         totalSize: <s:property value="#pageBean.totalCount"/>,
         callback: function (num) {
-            $(window).attr('location', '/article_pageList.action?currPage=' + num);
+            // 获取搜索的关键字
+            var keyWord = $('#input_search').val();
+            $(window).attr('location', '/article_pageList.action?currPage=' + num + "&keyWord=" + keyWord);
             // alert(num);
         }
     });
 
     $("#add").click(function () {
-        // alert("aaa");
-        $(window).attr('location', '${ctx }/mgr_add_article.jsp');
+        $(window).attr('location','${ctx }/location_add_article.action');
+    });
+
+    $('#input_search_btn').click(function () {
+        // 获取搜索的关键字
+        var keyWord = $('#input_search').val();
+        $(window).attr('location', '/article_pageList.action?keyWord=' + keyWord);
     });
 </script>
 

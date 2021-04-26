@@ -61,16 +61,16 @@
     </ul>
     <s:iterator value="#categoryList" var="category">
         <ul class="list_goods_ul">
-            <li><s:property value="#category.parentId"/></li>
+            <li><s:property value="#category.parentid"/></li>
             <li><s:property value="#category.cname"/></li>
             <li>
                 <a href="#" class="edit_btn" data-id="<s:property value='#category.cid'/>">
-                    <img class="img_icon" src="images/edit_icon.png" alt="">
+                    <img class="img_icon" src="../../images/edit_icon.png" alt="">
                 </a>
             </li>
             <li>
                 <a href="#" class="delete_btn" data-id="<s:property value='#category.cid'/>" >
-                    <img class="img_icon"src="images/delete_icon.png" alt="">
+                    <img class="img_icon" src="../../images/delete_icon.png" alt="">
                 </a>
             </li>
         </ul>
@@ -84,7 +84,7 @@
 </div>
 
 <div id="modal_content2" style="height: 250px; display: none">
-    <div id="close2"><img src="images/delete_icon.png" alt=""></div>
+    <div id="close2"><img src="../../images/delete_icon.png" alt=""></div>
     <div class="edit_content">
         <div class="item1">
             <div>
@@ -138,7 +138,7 @@
             var parentId = $('#parentId').val();
             var cname = $('#cname').val();
             $(window).attr('location',
-                '${pageContext.request.contextPath}/category_add.action?cname=' + cname + '&parentId=' + parentId);
+                '${pageContext.request.contextPath}/category_add.action?cname=' + cname + '&parentid=' + parentId);
         });
 
         $('#add').click(function () {
@@ -163,11 +163,12 @@
              * ajax 查询数据记录（异步请求）
              */
             $.post('${pageContext.request.contextPath}/category_updateUI.action', {'cid': cid}, function (data) {
+                console.log(data);
                 /**
                  * 把 json 数据展示到文本框中
                  */
                 $('#cname2').val(data[0].cname)
-                $('#parentid2').val(data[0].parentId)
+                $('#parentid2').val(data[0].parentid)
                 $('#cid2').val(data[0].cid)
             }, 'json');
         });
@@ -184,7 +185,7 @@
             var parentId = $('#parentid2').val();
             var cid = $('#cid2').val();
             $(window).attr('location',
-                '${pageContext.request.contextPath}/category_update.action?cid=' + cid + '&cname=' + cname + '&parentId=' + parentId);
+                '${pageContext.request.contextPath}/category_update.action?cid=' + cid + '&cname=' + cname + '&parentid=' + parentId);
         });
 
         $("#close2").click(function () {

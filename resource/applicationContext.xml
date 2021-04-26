@@ -48,4 +48,14 @@
 	<bean id="articleDao" class="wiki.laona.dao.impl.ArticleDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
+	
+	<!--拦截器-->
+	<bean id="locationAction" class="wiki.laona.web.LocationAction" scope="prototype">
+	
+	</bean>
+	
+	<!--前端页面展示-->
+	<bean id="webAction" class="wiki.laona.web.WebAction" scope="prototype">
+		<property name="articleService" ref="articleService"/>
+ 	</bean>
 </beans>

@@ -3,15 +3,8 @@ package wiki.laona.web;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.util.ServletContextAware;
 import wiki.laona.domain.User;
 import wiki.laona.service.ILoginService;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Map;
 
 /**
  * @program: Blog
@@ -42,6 +35,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<User> {
      */
     public String login() {
         User user = loginService.login(this.user);
+        // System.out.println("user = " + user);
         // 用户登录成功
         if (user != null) {
             ActionContext.getContext().getSession().put("curUser", user);
@@ -59,7 +53,8 @@ public class LoginAction extends ActionSupport implements ModelDriven<User> {
      * @return 退出功能
      */
     public String loginOut() {
-        System.out.println(user.getUsername() + "  用户退出。");
+        // User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+        // System.out.println(curUser.getUsername() + "  用户退出。");
         // 清楚用户信息
         ActionContext.getContext().getSession().remove("curUser");
         return "login_out";

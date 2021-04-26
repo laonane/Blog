@@ -7,8 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>博客后台管理系统</title>
-    <link href="../favicon.ico" rel="shortcut icon">
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
 </head>
 
 <body>
@@ -21,10 +21,10 @@
         <div class="username-text">用户名:</div>
         <div class="password-text">密码:</div>
         <div class="username-field">
-            <input type="text" name="username" value="laona"/>
+            <input type="text" name="username" placeholder="输入账号..."/>
         </div>
         <div class="password-field">
-            <input type="password" name="password" value="123"/>
+            <input type="password" name="password" placeholder="输入密码..."/>
         </div>
         <%--				<input type="checkbox" name="remember-me" id="remember-me" />--%>
         <input type="checkbox" id="remember-me"/>

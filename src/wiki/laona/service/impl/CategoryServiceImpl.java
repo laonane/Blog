@@ -1,6 +1,5 @@
 package wiki.laona.service.impl;
 
-import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.dao.ICategoryDao;
 import wiki.laona.domain.Category;
@@ -16,7 +15,6 @@ import java.util.List;
  **/
 @Transactional
 public class CategoryServiceImpl implements ICategoryService {
-    @Setter
     private ICategoryDao categoryDao;
 
     /**
@@ -67,12 +65,14 @@ public class CategoryServiceImpl implements ICategoryService {
     /**
      * 通过 id 删除分类信息
      *
-     * @param cid 分类 id
+     * @param category 分类实体(包含 id)
      */
     @Override
     public void deleteCategory(Category category) {
         categoryDao.deleteCategoryById(category);
     }
 
-
+    public void setCategoryDao(ICategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
+    }
 }

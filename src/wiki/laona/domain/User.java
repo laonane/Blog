@@ -1,16 +1,11 @@
 package wiki.laona.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * @program: Blog
  * @description: 用户
  * @author: HuaiAnGG
  * @create: 2020-11-25 10:46
  **/
-@Setter
-@Getter
 public class User {
     private Integer id;
     private String username;
@@ -23,5 +18,29 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

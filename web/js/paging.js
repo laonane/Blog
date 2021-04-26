@@ -4,9 +4,9 @@
 		this.element = element;
 		//传入形参
 		this.options = {
-			pageNo: options.pageNo||1,
+			pageNo: 	options.pageNo||1,
 			totalPage: options.totalPage,
-			totalSize:options.totalSize,
+			totalSize:	options.totalSize,
 			callback:options.callback
 		};
 		//根据形参初始化分页html和css代码

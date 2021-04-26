@@ -2,6 +2,7 @@ package wiki.laona.dao;
 
 import org.hibernate.criterion.DetachedCriteria;
 import wiki.laona.domain.Article;
+import wiki.laona.domain.Category;
 import wiki.laona.domain.PageBean;
 
 import java.util.List;
@@ -48,4 +49,36 @@ public interface IArticleDao {
      * @return 当前页的所有文章数据
      */
     List<Article> getPageData(DetachedCriteria detachedCriteria, Integer index, Integer pageSize);
+
+    /**
+     * 根据删除文章
+     * @param article 文章实体
+     */
+    void deleteArticleById(Article article);
+
+    /**
+     * 根据 id 获取分类信息
+     * @param parentId 父类 id
+     * @return
+     */
+    List<Category> getArticleCategory(Integer parentId);
+
+    /**
+     * 保存文章到数据库
+     * @param article 文章实体
+     */
+    void saveArticle(Article article);
+
+    /**
+     * 获取文章信息
+     * @param article 文章实体（包含文章 id）
+     * @return 文章实体
+     */
+    Article getArticle(Article article);
+
+    /**
+     * 更新数据库文章信息
+     * @param article 文章信息
+     */
+    void updateArticle(Article article);
 }

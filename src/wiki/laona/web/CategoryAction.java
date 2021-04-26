@@ -3,14 +3,12 @@ package wiki.laona.web;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import lombok.Setter;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
 import wiki.laona.domain.Category;
 import wiki.laona.service.ICategoryService;
 
-import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,7 +21,6 @@ import java.util.List;
 public class CategoryAction extends ActionSupport implements ModelDriven<Category> {
 
     private Category category = new Category();
-    @Setter
     private ICategoryService categoryService;
 
     @Override
@@ -61,6 +58,7 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
     public String updateUI() throws IOException {
         Integer cid = category.getCid();
         Category getCategory = categoryService.getCategory(cid);
+        System.out.println("CategoryAction.updateUI");
         System.out.println("getCategory = " + getCategory);
         // 格式化 json
         JSONArray jsonArray = JSONArray.fromObject(getCategory, new JsonConfig());
@@ -85,5 +83,9 @@ public class CategoryAction extends ActionSupport implements ModelDriven<Categor
         System.out.println("category = " + category);
         categoryService.deleteCategory(category);
         return "list_action";
+    }
+
+    public void setCategoryService(ICategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 }
