@@ -1,9 +1,7 @@
 package wiki.laona.web;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import lombok.Setter;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import org.apache.commons.io.FileUtils;
@@ -33,49 +31,41 @@ public class ArticleAction extends ActionSupport {
     /**
      * 文章服务接口
      */
-    @Setter
     private IArticleService articleService;
 
     /**
      * 当前页码
      */
-    @Setter
     private Integer currPage = 1;
 
     /**
      * 搜索关键字
      */
-    @Setter
     private String keyWord;
 
     /**
      * 删除文章 id
      */
-    @Setter
     private Integer articleId;
 
     /**
      * 分类父级id
      */
-    @Setter
     private Integer parentId;
 
     /**
      * 上传的文件名
      */
-    @Setter
     private String uploadFileName;
 
     /**
      * 上传的文件
      */
-    @Setter
     private File upload;
 
     /**
      * 上传的文件类型
      */
-    @Setter
     private String uploadContentType;
 
     /**
@@ -85,33 +75,27 @@ public class ArticleAction extends ActionSupport {
     /**
      * 文章标题
      */
-    @Setter
     private String articleTitle;
     /**
      * 文章内容
      */
-    @Setter
     private String articleContent;
     /**
      * 文章摘要
      */
-    @Setter
     private String articleDesc;
     /**
      * 文章分类 cid
      */
-    @Setter
     private Integer categoryCid;
     /**
      * 文章分类 parentId
      */
-    @Setter
     private Integer categoryParentId;
 
     /**
      * 修改文章的图片地址
      */
-    @Setter
     private String articlePic;
 
     /**
@@ -286,5 +270,61 @@ public class ArticleAction extends ActionSupport {
         article.setArticlePic(uuidFileName);
         // 设置当前时间
         article.setArticleTime(new Date().getTime());
+    }
+
+    public void setArticleService(IArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public void setUploadFileName(String uploadFileName) {
+        this.uploadFileName = uploadFileName;
+    }
+
+    public void setUpload(File upload) {
+        this.upload = upload;
+    }
+
+    public void setUploadContentType(String uploadContentType) {
+        this.uploadContentType = uploadContentType;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public void setArticleContent(String articleContent) {
+        this.articleContent = articleContent;
+    }
+
+    public void setArticleDesc(String articleDesc) {
+        this.articleDesc = articleDesc;
+    }
+
+    public void setCategoryCid(Integer categoryCid) {
+        this.categoryCid = categoryCid;
+    }
+
+    public void setCategoryParentId(Integer categoryParentId) {
+        this.categoryParentId = categoryParentId;
+    }
+
+    public void setArticlePic(String articlePic) {
+        this.articlePic = articlePic;
     }
 }

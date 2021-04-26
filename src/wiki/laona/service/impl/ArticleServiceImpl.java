@@ -1,6 +1,5 @@
 package wiki.laona.service.impl;
 
-import lombok.Setter;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.transaction.annotation.Transactional;
 import wiki.laona.dao.IArticleDao;
@@ -20,7 +19,6 @@ import java.util.List;
 @Transactional
 public class ArticleServiceImpl implements IArticleService {
 
-    @Setter
     private IArticleDao articleDao;
 
     /**
@@ -113,4 +111,7 @@ public class ArticleServiceImpl implements IArticleService {
         articleDao.updateArticle(article);
     }
 
+    public void setArticleDao(IArticleDao articleDao) {
+        this.articleDao = articleDao;
+    }
 }

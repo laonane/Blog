@@ -11,7 +11,7 @@
 <style>
     .admin_top{
         height: 70px;
-        background:#283643;;
+        background:#283643;
         text-align: right;
         padding-right: 70px;
         color: white;

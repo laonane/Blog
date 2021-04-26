@@ -1,7 +1,6 @@
 package wiki.laona.web;
 
 import com.opensymphony.xwork2.ActionSupport;
-import lombok.Setter;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import org.apache.struts2.ServletActionContext;
@@ -13,8 +12,6 @@ import wiki.laona.domain.PageBean;
 import wiki.laona.service.IArticleService;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,31 +25,26 @@ public class WebAction extends ActionSupport {
     /**
      * 文章服务接口
      */
-    @Setter
     private IArticleService articleService;
 
     /**
      * 当前页码
      */
-    @Setter
     private Integer currPage = 1;
 
     /**
      * 父类 id
      */
-    @Setter
     private Integer parentId;
 
     /**
      * 子分类 cid
      */
-    @Setter
     private Integer cid;
 
     /**
      * 文章 articleId
      */
-    @Setter
     private Integer articleId;
 
     /**
@@ -107,5 +99,25 @@ public class WebAction extends ActionSupport {
         JSONObject jsonObject = JSONObject.fromObject(articleDetail, jsonConfig);
 
         ServletActionContext.getResponse().getWriter().println(jsonObject.toString());
+    }
+
+    public void setArticleService(IArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    public void setCurrPage(Integer currPage) {
+        this.currPage = currPage;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
     }
 }

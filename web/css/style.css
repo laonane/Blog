@@ -404,6 +404,7 @@ input[type="submit"]:hover, input[type="submit"]:focus {
 	right: 0;
 	display: none;
 }
+
 #modal_content{
 	padding: 30px 20px;
 	width: 400px;

@@ -1,8 +1,5 @@
 package wiki.laona.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
 /**
@@ -11,8 +8,6 @@ import java.util.List;
  * @author: HuaiAnGG
  * @create: 2020-11-28 00:28
  **/
-@Setter
-@Getter
 public class PageBean<T> {
     /**
      * 当前页
@@ -92,5 +87,37 @@ public class PageBean<T> {
                 ", totalPage=" + totalPage +
                 ", list=" + list +
                 '}';
+    }
+
+    public Integer getCurrentPage() {
+        return this.currentPage;
+    }
+
+    public Integer getPageSize() {
+        return this.pageSize;
+    }
+
+    public Integer getTotalCount() {
+        return this.totalCount;
+    }
+
+    public List<T> getList() {
+        return this.list;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public void setList(List<T> list) {
+        this.list = list;
     }
 }
