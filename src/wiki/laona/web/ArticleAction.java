@@ -16,7 +16,6 @@ import wiki.laona.service.IArticleService;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -269,7 +268,7 @@ public class ArticleAction extends ActionSupport {
         // 设置图片
         article.setArticlePic(uuidFileName);
         // 设置当前时间
-        article.setArticleTime(new Date().getTime());
+        article.setArticleTime(System.currentTimeMillis());
     }
 
     public void setArticleService(IArticleService articleService) {
