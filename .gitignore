@@ -29,3 +29,4 @@ sshj.jar
 /resource/rebel-remote.xml
 /web/upload/
 /web/ueditor/jsp/upload/image
+/blog-portal/node_modules/
