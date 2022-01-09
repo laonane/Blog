@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>老衲的大清(blog.laona.wiki)</title>
+    <title>老衲维基(blog.laona.wiki)</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
