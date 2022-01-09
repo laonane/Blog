@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>老衲的大清(blog.laona.wiki)</title>
+    <title>老衲维基(blog.laona.wiki)</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/js/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
@@ -29,7 +29,7 @@
                 <li style="margin-right: 20px;">
                     <a href="#" target="_blank">
                         <span class="icon-tel"></span>
-                        欢迎来到：老衲的大清
+                        欢迎来到：老衲维基
                     </a>
                 </li>
                 <li>
@@ -41,7 +41,7 @@
             </ul>
         </div>
         <div class="col-md-offset-3">
-            <span class="top-bar-right pull-right">喜欢编程, 就来<span style="color: red">老衲的大清</span> (blog.<span
+            <span class="top-bar-right pull-right">喜欢编程, 就来<span style="color: red">老衲维基</span> (blog.<span
                     style="color: red">laona</span>.wiki)</span>
         </div>
     </div>
@@ -82,7 +82,7 @@
     <img src="${pageContext.request.contextPath}/images/about_java.png" alt="" class="one-img" width="280px">
     <div class="one-right">
         <h1>技术专栏</h1>
-        <span>喜欢编程,就来老衲的大清吧!</span>
+        <span>喜欢编程,就来老衲维基吧!</span>
         <div style="position: relative;" class="one-bottom">
             <button>关注我们</button>
             <img src="${pageContext.request.contextPath}/images/ewm2.png" alt="" width="100px" class="one-ewm">

@@ -50,7 +50,7 @@
                 <li><a href="">支持我们</a></li>
                 <li><a href="">粤IPC备 123498768-1</a></li>
             </ul>
-            <p>Copyright © 2018-2019 Angel Care All Rights Reserved. 老衲的大清 版权所有</p>
+            <p>Copyright © 2018-2019 Angel Care All Rights Reserved. 老衲维基 版权所有</p>
         </div>
     </div>
 </footer>
