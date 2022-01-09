@@ -30,3 +30,7 @@
 ## FEATURE
 
 **打算搭建 2.0 版本，使用 springboot 构建。** 
+
+- 2022年1月9日
+
+已经添加 [dev分支](https://github.com/HuaiAnGG/Blog/tree/dev)  支持Springboot（功能待实现）
